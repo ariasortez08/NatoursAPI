@@ -25,6 +25,19 @@ const checkID = (req, res, next, val) => {
   next();
 };
 
+const checkBody = (req, res, next) => {
+  const { name, price } = req.body;
+
+  if (!name || !price) {
+    return res.status(400).json({
+      status: 'failed',
+      message: 'The name and price are required',
+    });
+  }
+
+  next();
+};
+
 const getTour = (req, res) => {
   const id = req.params.id * 1;
   const tour = tours.find((el) => el.id === id);
@@ -90,4 +103,5 @@ module.exports = {
   updateTour,
   deleteTour,
   checkID,
+  checkBody,
 };

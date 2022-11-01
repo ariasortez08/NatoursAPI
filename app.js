@@ -11,6 +11,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 
+// ? SERVE PUBLIC FILES
+
+app.use(express.static(`${__dirname}/public`));
+
 app.use((req, res, next) => {
   app.requestTime = new Date().toISOString();
   next();
